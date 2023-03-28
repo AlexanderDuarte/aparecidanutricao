@@ -2,42 +2,54 @@
 var titulo = document.querySelector(".titulo");
 titulo.textContent = "Aparecida Nutricionista";
 
-//obtendo os dados do paciente Paulo
-//obtendo a tr do primeiro paciente
-var trPaciente = document.querySelector("#primeiro-paciente");
-//obtendo a td do paciente
-var tdPeso = trPaciente.querySelector(".info-peso");
-//obtendo o peso contido na td
-var peso = tdPeso.textContent;
-//obtendo a td do paciente
-var tdAltura = trPaciente.querySelector(".info-altura");
-//obtendo a altura do paciente
-var altura = tdAltura.textContent;
+//obtendo um array de todos os pacientes com a classe .paciente e atribuindo à variavel pacientes
+var pacientes = document.querySelectorAll(".paciente");
 
+//loop que percorre todos os itens do array pacientes
+for (i = 0; i < pacientes.length; i++) {
 
-var tdImc = trPaciente.querySelector(".info-imc");
+    //declara a variavel paciente e atribui à variavel paciente[i]
+    //para facilitar a escrita do codigo
+    var paciente = pacientes[i];
 
+    //obtém dos dados de peso e altura do paciente
+    var peso = paciente.querySelector(".info-peso").textContent;
+    var altura = paciente.querySelector(".info-altura").textContent;
 
-var pesoEhValido = true;
-var alturaEhValida = true;
+    //define as variáveis de validação de peso e altura
+    var pesoEhValido = true;
+    var alturaEhValida = true;
 
-if (peso <= 0 || peso >= 1000) {
-    tdImc.textContent = "Peso inválido!";
-    pesoEhValido = false;
+    //condicional que verifica se o peso é valido
+    if (peso <= 0 || peso >= 1000) {
+        //altera o texto da tabela celula IMC informando o erro
+        paciente.querySelector(".info-imc").textContent = "Peso inválido";
+        //declara como falsa a validade do peso
+        pesoEhValido = false;
+        //altera a cor da linha para identificar o erro
+        paciente.style.background = "#FAAAAA";
+    }
+    //condicional que verifica se a altura é valida
+    if (altura <= 0 || altura >= 3) {
+        //altera o texto da tabela celula IMC informando o erro
+        paciente.querySelector(".info-imc").textContent = "Altura inválida";
+        //declara como falsa a validade da altura
+        pesoEhValido = false;
+        //altera a cor da linha para identificar o erro
+        paciente.style.background = "#FAAAAA";
+    }
+
+    //condicao que confere se peso e altura são simultaneamente válidas
+    if (pesoEhValido && alturaEhValida) {
+        //calculando o imc
+        var imc = peso / (altura * altura);
+
+        //inserindo o resultado dentro do HTML na celula IMC
+        paciente.querySelector(".info-imc").textContent = imc.toFixed(2);
+    }
 }
 
-if (altura <= 0 || altura >= 3) {
-    tdImc.textContent = "Altura inválida!";
-    pesoEhValido = false;
-}
 
-if (pesoEhValido  && alturaEhValida) {
-    //calculando o imc
-    var imc = peso / (altura * altura);
-
-    //inserindo o resultado dentro do HTML
-    tdImc.textContent = imc;
-}
 
 
 
