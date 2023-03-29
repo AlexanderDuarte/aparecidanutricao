@@ -26,8 +26,7 @@ for (i = 0; i < pacientes.length; i++) {
         paciente.querySelector(".info-imc").textContent = "Peso inválido";
         //declara como falsa a validade do peso
         pesoEhValido = false;
-        //altera a cor da linha para identificar o erro
-        paciente.style.background = "#FAAAAA";
+        paciente.classList.add("paciente-invalido");
     }
     //condicional que verifica se a altura é valida
     if (altura <= 0 || altura >= 3) {
@@ -35,8 +34,7 @@ for (i = 0; i < pacientes.length; i++) {
         paciente.querySelector(".info-imc").textContent = "Altura inválida";
         //declara como falsa a validade da altura
         pesoEhValido = false;
-        //altera a cor da linha para identificar o erro
-        paciente.style.background = "#FAAAAA";
+        paciente.classList.add("paciente-invalido");
     }
 
     //condicao que confere se peso e altura são simultaneamente válidas
