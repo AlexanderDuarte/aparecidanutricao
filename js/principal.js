@@ -47,9 +47,58 @@ for (i = 0; i < pacientes.length; i++) {
     }
 }
 
+//declarando as variáveis que carregam o formuláio e o botao
+var form = document.querySelector("#form-adiciona");
+var botaoAdicionar = document.querySelector("#adicionar-paciente");
 
+//adicionando vento ao botão usando função anonima
+ botaoAdicionar.addEventListener("click", function(event){
 
+    //chamada de função que previne comportamento padrao do formulario
+    event.preventDefault();
 
+    //obtendo variáveis com valores inseridos no formulario
+    var nome = form.nome.value;
+    var peso = form.peso.value;
+    var altura = form.altura.value;
+    var gordura = form.gordura.value;
+    var imc = 0;
 
+    //Criando os elementos HTML para serem preenchidos
+    var pacienteTr = document.createElement("tr");
+    var nomeTd = document.createElement("td");
+    var pesoTd = document.createElement("td");
+    var alturaTd = document.createElement("td");
+    var gorduraTd = document.createElement("td");
+    var imcTd = document.createElement("td");
 
+    //preenchendo os elementos criados com os valores inseridos no formulario
+    nomeTd.textContent = nome;
+    pesoTd.textContent = peso;
+    alturaTd.textContent = altura;
+    gorduraTd.textContent = gordura;
+    imcTd.textContent = imc;
 
+    //Adicionando as classes aos novos elementos criados
+    nomeTd.classList.add("info-nome");
+    pesoTd.classList.add("info-peso");
+    alturaTd.classList.add("info-altura");
+    gorduraTd.classList.add("info-gordura");
+    imcTd.classList.add("info-imc");
+
+    //inserindo as celulas da tabela na TR criada
+    pacienteTr.appendChild(nomeTd);
+    pacienteTr.appendChild(pesoTd);
+    pacienteTr.appendChild(alturaTd);
+    pacienteTr.appendChild(gorduraTd);
+    pacienteTr.appendChild(imcTd);
+    
+    //craindo a variável tabela que se refere à tabela da página
+    var tabela = document.querySelector("#tabela-pacientes");
+
+    //inserindo a TR dentro da tabela
+    tabela.appendChild(pacienteTr);
+
+    console.log(pacienteTr.querySelectorAll("td").length);
+
+ });
