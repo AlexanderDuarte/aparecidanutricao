@@ -1,49 +1,57 @@
-//Alterando o título da página
 var titulo = document.querySelector(".titulo");
 titulo.textContent = "Aparecida Nutricionista";
 
-//obtendo um array de todos os pacientes com a classe .paciente e atribuindo à variavel pacientes
 var pacientes = document.querySelectorAll(".paciente");
 
-//loop que percorre todos os itens do array pacientes
+
+
 for (i = 0; i < pacientes.length; i++) {
 
-    //declara a variavel paciente e atribui à variavel paciente[i]
-    //para facilitar a escrita do codigo
     var paciente = pacientes[i];
 
-    //obtém dos dados de peso e altura do paciente
     var peso = paciente.querySelector(".info-peso").textContent;
     var altura = paciente.querySelector(".info-altura").textContent;
+    
 
-    //define as variáveis de validação de peso e altura
-    var pesoEhValido = true;
-    var alturaEhValida = true;
+    
+    var pesoEhValido = validaPeso(peso);
+    var alturaEhValida = validaAltura(altura);
+    var tdImc = paciente.querySelector(".info-imc");
 
-    //condicional que verifica se o peso é valido
-    if (peso <= 0 || peso >= 1000) {
-        //altera o texto da tabela celula IMC informando o erro
-        paciente.querySelector(".info-imc").textContent = "Peso inválido";
-        //declara como falsa a validade do peso
-        pesoEhValido = false;
+    
+    if (!pesoEhValido) {
+        
+        tdImc.textContent = "Peso inválido";
         paciente.classList.add("paciente-invalido");
     }
-    //condicional que verifica se a altura é valida
-    if (altura <= 0 || altura >= 3) {
-        //altera o texto da tabela celula IMC informando o erro
-        paciente.querySelector(".info-imc").textContent = "Altura inválida";
-        //declara como falsa a validade da altura
-        pesoEhValido = false;
+    
+    if (!alturaEhValida) {
+        tdImc.textContent = "Altura inválida";
         paciente.classList.add("paciente-invalido");
     }
 
-    //condicao que confere se peso e altura são simultaneamente válidas
     if (pesoEhValido && alturaEhValida) {
-        //calculando o imc
         var imc = calculaImc(peso, altura);
+        tdImc.textContent = imc
+    }
+}
 
-        //inserindo o resultado dentro do HTML na celula IMC
-        paciente.querySelector(".info-imc").textContent = imc
+
+
+
+function validaPeso(peso){
+    if(peso > 0 && peso < 1000){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function validaAltura(altura){
+    if(altura > 0 && altura < 3.00){
+        return true;
+    } else{
+        return false;
     }
 }
 
